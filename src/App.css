@@ -1,0 +1,107 @@
+.aaaa {
+  color: #f0f0f0;
+  color: #fc8e21;
+  color: #d9d9d9;
+  color: #575757;
+  color: #e3901c 
+}
+
+
+.App {
+  background-color: #f0f0f0;
+  
+}
+
+.product{
+  margin: 1rem;
+  
+}
+
+.card {
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif !important;
+  
+}
+
+.card-title{
+  position: relative;
+  top: 5%;
+}
+
+.logo{
+  width: 3rem;
+  height: 3rem;
+}
+
+.new{
+  width: 2.5rem;
+  height: 1.5rem;
+  background-color: #fc8e21;
+  position: absolute;
+  text-align: center;
+  color: white;
+  top: 1%;
+  left: 2%;
+}
+
+.navbar-nav {
+  
+  align-items: center;
+
+}
+.navbar {
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.66);
+-moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.66);
+box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.66);
+color: #575757 !important;
+}
+
+.products {
+  display: flex;
+  margin: 1% 5% 0 1%;
+}
+
+.products__products{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search {
+  width: 25rem !important;
+}
+
+.search__container{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 30%;
+}
+
+.nav_filter{
+  height: 5rem;
+  
+}
+
+.products__container{
+  background-color: white;
+}
+
+.search__container > svg {
+  width: 30px;
+    height: 30px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.navbar-nav > a > svg {
+  width: 30px;
+  height: 30px;
+}
+
+.sideFilter {
+  width: 56% !important;
+    height: 100%;
+    background-color: white;
+    margin-left: 2rem;
+    margin-right: 1rem;
+}
