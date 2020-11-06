@@ -3,7 +3,8 @@
     "title": "black pants ",
     "new": true,
     "folder":"",
-    "image": ""
+    "image": "",
+    "image-secondary": "images/products/p3.jpg"
 },
 {
     "id": 2,

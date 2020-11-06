@@ -3,13 +3,15 @@ import {Card, Button} from 'react-bootstrap'
 import New from './New'
 import ProductPopup from './ProductPopup'
 
+
 const Product = () => {
     const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    const handleClose = (e) => {e.stopPropagation(); setShow(false); console.log("close")}
+    const handleShow = (e) => {e.stopPropagation();setShow(true); console.log("show")}
+    const closePopup = () => { setShow(false); console.log("pop")}
     return (
-        <Card className="product" style={{ width: '18rem' }} >  
+        <Card onClick={(e)=> handleShow(e)} className="product" style={{ width: '18rem' }} >  
         
         <New/>
         <Card.Img variant="top" src="/images/products/p1.jpg"/>
@@ -18,7 +20,14 @@ const Product = () => {
             <Card.Title>Card Title </Card.Title>
 
             <div>150€</div>
-            <ProductPopup/> 
+
+            <div className="product-popup">
+            <ProductPopup 
+                show={show} 
+                close={handleClose} 
+                closePopup={closePopup}
+                /> 
+            </div>
         </Card.Body>
         
 </Card>

@@ -6,6 +6,7 @@ import 'reactjs-popup/dist/index.css';
 import ProductPopup from './sub-components/ProductPopup';
 
 const Products = () => {
+
     return (
         <div className="products__container">
             
@@ -13,6 +14,34 @@ const Products = () => {
                 <SideFilter/>
                 <div className="products__products">
                 <Product  />
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
+                <Product/>
                 <Product/>
                 <Product/>
                 <Product/>
