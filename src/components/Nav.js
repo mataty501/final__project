@@ -2,14 +2,25 @@ import React, {useState} from 'react';
 import {Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import {FaSearch, FaHeart, FaShoppingBag, FaUserAlt} from 'react-icons/fa';
 import Avatar from '@material-ui/core/Avatar/Avatar';
-import User from './sub-components/User'
+import User from './sub-components/User';
+import Fav from './sub-components/Fav';
+import Shop from './sub-components/Shop';
 
 const NavContainer = () => {
     const [show, setShow] = useState(false);
-
     const handleClose = (e) => {e.stopPropagation(); setShow(false); console.log("close")}
     const handleShow = (e) => {e.stopPropagation();setShow(true); console.log("show")}
     const closePopup = () => { setShow(false); console.log("pop")}
+
+    const [show_fav, setShow_fav] = useState(false);
+    const handleClose_fav = (e) => {e.stopPropagation(); setShow_fav(false); console.log("close")}
+    const handleShow_fav = (e) => {e.stopPropagation();setShow_fav(true); console.log("show")}
+    const closePopup_fav = () => { setShow_fav(false); console.log("pop")}
+
+    const [show_shop, setShow_shop] = useState(false);
+    const handleClose_shop = (e) => {e.stopPropagation(); setShow_shop(false); console.log("close")}
+    const handleShow_shop = (e) => {e.stopPropagation();setShow_shop(true); console.log("show")}
+    const closePopup_shop = () => { setShow_shop(false); console.log("pop")}
     return ( 
         <div className="nav-tools">
         <Navbar collapseOnSelect expand="lg" bg="white" variant="black">
@@ -17,14 +28,7 @@ const NavContainer = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto"> 
-            <Nav.Link href="#features"></Nav.Link> 
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
+          
             </Nav>
             <Nav>
                 
@@ -39,12 +43,18 @@ const NavContainer = () => {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
             </Nav.Link>
             <Nav.Link href="#deets">
-                
-                <div><FaHeart/>0</div>
+            <Fav show={show_fav} 
+                    close={handleClose_fav} 
+                    closePopup={closePopup_fav} 
+                />
+                <div><FaHeart onClick={(e)=> handleShow_fav(e)}/>0</div>
             </Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
-                
-                <div><FaShoppingBag/>0</div>
+            <Shop show={show_shop}  
+                    close={handleClose_shop} 
+                    closePopup={closePopup_shop} 
+                />
+                <div><FaShoppingBag onClick={(e)=> handleShow_shop(e)}/>0</div>
             </Nav.Link> 
             </Nav>
         </Navbar.Collapse>

@@ -16,6 +16,34 @@
   margin: 1rem;
   
 }
+.card-body-func{
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-body  svg {
+  width: 30px;
+  height: 30px;
+  fill: rgba(255, 2, 2, 0.521)
+}
+
+.product-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body  svg:hover {
+  fill: red;
+}
+
+.product-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.product-btn button {
+  width: 80% !important;
+}
 
 .card {
   cursor: pointer;
@@ -128,6 +156,10 @@ color: #575757 !important;
 
 }
 
+.accordion {
+  width: 15rem !important;
+}
+
 .product-body-carousel-description {
   display: flex;
   flex-direction : column !important;
@@ -142,11 +174,14 @@ color: #575757 !important;
 .product-body {
   display: flex !important;
   
+}
   
+.product:hover {
+  border: 1px solid black;
 }
 
 .sideFilter {
-  width: 56% !important;
+  width: 35% !important;
     height: 100%;
     background-color: white;
     margin-left: 2rem;

@@ -3,43 +3,54 @@
     "title": "black pants ",
     "new": true,
     "folder":"",
-    "image": "",
-    "image-secondary": "images/products/p3.jpg"
+    "image": "/images/products/p1.jpg",
+    "price": 150,
+    "gender": "male"
 },
 {
     "id": 2,
     "title": "purple pants ",
-    "new": true,
+    "new": false,
     "folder":"",
-    "image": "" 
+    "image": "/images/products/p1.jpg",
+    "price": 185,
+    "gender": "male"
 },
 {
     "id": 3,
     "title": "orange pants ",
     "new": true,
     "folder":"",
-    "image": ""
+    "image": "/images/products/p1.jpg",
+    "price": 256,
+    "gender": "male"
 },
 {
     "id": 4,
     "title": "green pants ",
     "new": true,
     "folder":"",
-    "image": ""
+    "image": "/images/products/p2.jpg",
+    "price": 120,
+    "gender": "female"
 },
 {
     "id": 5,
     "title": "red pants ",
-    "new": true,
+    "new": false,
     "folder":"",
-    "image": ""
+    "image": "/images/products/p1.jpg",
+    "price": 70,
+    "gender": "female"
 },
 {
     "id": 6,
     "title": "yellow pants ",
     "new": true,
     "folder":"",
-    "image": ""
+    "image": "/images/products/p1.jpg",
+    "price": 25,
+    "gender": "female"
 }
 
 ]
