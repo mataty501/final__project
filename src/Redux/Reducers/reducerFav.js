@@ -6,7 +6,15 @@ const initialState = { fav: [] };
 const counterReducerFav = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAV:
-      return { fav: [...state.fav, action.payload] };
+      initialState.forEach((e) => {
+        if (e.name !== payload.name) {
+          return { fav: [...state.fav, action.payload] };
+        }
+        else {
+          return { fav: [...state.fav] }
+        }
+      })
+
     default:
       return state;
   }
