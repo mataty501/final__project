@@ -4,17 +4,33 @@ import Products from './components/Products';
 import Footer from './components/Footer'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Admin from './admin/Admin';
 
 
 function App() {
   return (
-    <div className="App">
-      <Nav />
-      <Filter />
-      <Products />
-      <Footer />
-    </div>
+    <>
+      <Link to="/Admin">Admin</Link>
+      <Switch>
+        <Route path="/">
+          <div className="App">
+            <Nav />
+            <Filter />
+            <Products />
+            <Footer />
+          </div>
+        </Route>
+        <Route path="/Admin">
+          <Admin />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
