@@ -26,7 +26,8 @@ const NavContainer = () => {
     const closePopup_shop = () => { setShow_shop(false); console.log("pop") }
 
     const fav_list = useSelector(state => state.Fav.fav.length)
-    console.log(useSelector(state => state.Fav.fav))
+    const cart_list = useSelector(state => state.Add.cart.length)
+
     return (
         <div className="nav-tools">
             <Navbar collapseOnSelect expand="lg" bg="white" variant="black">
@@ -60,7 +61,7 @@ const NavContainer = () => {
                                 close={handleClose_shop}
                                 closePopup={closePopup_shop}
                             />
-                            <div><FaShoppingBag onClick={(e) => handleShow_shop(e)} />0</div>
+                            <div><FaShoppingBag onClick={(e) => handleShow_shop(e)} />{cart_list}</div>
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

@@ -2,15 +2,33 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Admin from './admin/Admin'
 import reportWebVitals from './reportWebVitals';
 import store from './Redux/Store/store';
-import {Provider} from 'react-redux';
-
+import { Provider } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+      <Router>
+
+        <Link to="/Admin">Admin</Link>
+
+        <Switch>
+          <Route path="/">
+            <App />
+          </Route>
+          <Route path="/Admin">
+            <Admin />
+          </Route>
+        </Switch>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

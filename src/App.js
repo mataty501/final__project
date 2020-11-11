@@ -5,13 +5,15 @@ import Footer from './components/Footer'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+
 function App() {
   return (
     <div className="App">
-      <Nav/>
-      <Filter/>
-      <Products/>
-      <Footer/>
+      <Nav />
+      <Filter />
+      <Products />
+      <Footer />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import New from './New';
 import ProductPopup from './ProductPopup';
 import { FaHeart, FaCartArrowDown } from 'react-icons/fa';
-import { ADD_ADD, ADD_FAV } from '../../Redux/Actions/actions';
+import { ADD_CART, ADD_FAV } from '../../Redux/Actions/actions';
 
 const Product = (props) => {
     const [show, setShow] = useState(false);
@@ -20,10 +20,17 @@ const Product = (props) => {
         })
     }
 
+    const redux_cart = () => {
+        dispatch({
+            type: ADD_CART,
+            payload: { id: props.id, name: props.title }
+        })
+    }
+
     return (
 
         <Card onClick={(e) => handleShow(e)} className="product" style={{ width: '18rem' }} >
-            {console.log(props.new)}
+
             {props.new && <div><New /></div>}
             <Card.Img variant="top" src={props.image} />
             <Card.Body>
@@ -39,7 +46,10 @@ const Product = (props) => {
                                 redux_fav();
 
                             }} />
-                            <FaCartArrowDown onClick={(e) => { e.stopPropagation() }} />
+                            <FaCartArrowDown onClick={(e) => {
+                                e.stopPropagation()
+                                redux_cart();
+                            }} />
                         </div>
                         <div className="product-popup">
                             <ProductPopup

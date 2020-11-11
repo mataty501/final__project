@@ -2,13 +2,21 @@ import { ADD_CART } from "../Actions/actions";
 
 const initialState = { cart: [] };
 
-const counterReducerAdd = (state = initialState, action) => {
+const reducerAdd = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CART:
-      return { add_cart: [...state.cart, action.payload] };
+
+      const res = state.cart.find((elem) => elem.id == action.payload.id)
+
+      if (res === undefined) {
+        return { cart: [...state.cart, action.payload] };
+      }
+      else {
+        return { cart: [...state.cart] }
+      }
     default:
       return state;
   }
 };
 
-export default counterReducerAdd;
+export default reducerAdd;

@@ -3,21 +3,20 @@ import { ADD_FAV } from "../Actions/actions";
 
 const initialState = { fav: [] };
 
-const counterReducerFav = (state = initialState, action) => {
+const reducerFav = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAV:
-      initialState.forEach((e) => {
-        if (e.name !== payload.name) {
-          return { fav: [...state.fav, action.payload] };
-        }
-        else {
-          return { fav: [...state.fav] }
-        }
-      })
+      const res = state.fav.find((elem) => elem.id == action.payload.id)
 
+      if (res === undefined) {
+        return { fav: [...state.fav, action.payload] };
+      }
+      else {
+        return { fav: [...state.fav] }
+      }
     default:
       return state;
   }
 };
 
-export default counterReducerFav;
+export default reducerFav;
