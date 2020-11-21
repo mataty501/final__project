@@ -3,28 +3,73 @@
   color: #fc8e21;
   color: #d9d9d9;
   color: #575757;
-  color: #e3901c 
+  color: #e3901c;
 }
-
 
 .App {
   background-color: #f0f0f0;
-  
 }
 
-.product{
+.product {
   margin: 1rem;
-  
 }
-.card-body-func{
+.card-body-func {
   display: flex;
   justify-content: space-between;
 }
 
-.card-body  svg {
+.none-active-fav,
+.none-active-cart {
   width: 30px;
   height: 30px;
-  fill: rgba(255, 2, 2, 0.521)
+  fill: rgba(255, 2, 2, 0.521) !important;
+}
+
+.active-fav,
+.active-cart {
+  width: 30px;
+  height: 30px;
+  fill: red !important;
+}
+
+.navToolsButton {
+  width: 50px;
+  height: 70px;
+
+  position: fixed;
+  right: 0;
+  top: 30%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+
+.navToolsButton svg {
+  width: 30px;
+  height: 30px;
+  fill: #007bff;
+}
+
+.navToolsButton div {
+  color: #007bff;
+}
+
+.addProductButton {
+  width: 50px;
+  height: 50px;
+  background-color: #30c023;
+  border: 2px solid rgb(228, 228, 228);
+  position: fixed;
+  right: 0;
+  top: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
 }
 
 .product-options {
@@ -32,8 +77,8 @@
   flex-direction: column;
 }
 
-.card-body  svg:hover {
-  fill: red;
+.card-body svg:hover {
+  fill: red !important;
 }
 
 .product-btn {
@@ -47,21 +92,20 @@
 
 .card {
   cursor: pointer;
-  font-family: 'Oswald', sans-serif !important;
-  
+  font-family: "Oswald", sans-serif !important;
 }
 
-.card-title{
+.card-title {
   position: relative;
   top: 5%;
 }
 
-.logo{
+.logo {
   width: 3rem;
   height: 3rem;
 }
 
-.new{
+.new {
   width: 2.5rem;
   height: 1.5rem;
   background-color: #fc8e21;
@@ -73,15 +117,14 @@
 }
 
 .navbar-nav {
-  
   align-items: center;
-
+  flex-direction: row !important;
 }
 .navbar {
-  -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.66);
--moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.66);
-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.66);
-color: #575757 !important;
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.66);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.66);
+  color: #575757 !important;
 }
 
 .products {
@@ -89,7 +132,7 @@ color: #575757 !important;
   margin: 1% 5% 0 1%;
 }
 
-.products__products{
+.products__products {
   display: flex;
   flex-wrap: wrap;
 }
@@ -98,27 +141,34 @@ color: #575757 !important;
   width: 30rem !important;
 }
 
-.search__container{
+.nav-filter svg:nth-child(2) {
+  fill: rgb(26, 26, 185);
+}
+
+.card-img-top {
+  height: 78%;
+}
+
+.search__container {
   display: flex;
   align-items: center;
   position: absolute;
   left: 30%;
 }
 
-.nav_filter{
+.nav_filter {
   height: 5rem;
-  
 }
 
-.products__container{
+.products__container {
   background-color: white;
 }
 
 .search__container > svg {
   width: 30px;
-    height: 30px;
-    margin: 10px;
-    cursor: pointer;
+  height: 30px;
+  margin: 10px;
+  cursor: pointer;
 }
 
 .navbar-nav > a > div > svg {
@@ -126,19 +176,17 @@ color: #575757 !important;
   height: 30px;
 }
 
-.navbar-nav > a  > svg {
+.navbar-nav > a > svg {
   width: 30px;
   height: 30px;
 }
 
-.carousel{
+.carousel {
   width: 20rem;
   height: 20rem;
 }
 
-
-
-.carousel  img {
+.carousel img {
   height: 20rem;
 }
 
@@ -146,14 +194,12 @@ color: #575757 !important;
   max-width: 65rem !important;
 } */
 
-.modal-dialog{
+.modal-dialog {
   max-width: 50rem !important;
 }
-.modal-90w{
- 
-    width: 50rem !important; 
-    max-width: 50rem !important;
-
+.modal-90w {
+  width: 50rem !important;
+  max-width: 50rem !important;
 }
 
 .accordion {
@@ -162,8 +208,7 @@ color: #575757 !important;
 
 .product-body-carousel-description {
   display: flex;
-  flex-direction : column !important;
-
+  flex-direction: column !important;
 }
 
 .product-body-purchase {
@@ -173,17 +218,29 @@ color: #575757 !important;
 
 .product-body {
   display: flex !important;
-  
 }
-  
+
 .product:hover {
   border: 1px solid black;
 }
 
+.nav-filter {
+  float: right;
+}
+
+.navbar-nav a {
+  padding: 0.75rem !important;
+}
+
+.navToolsButton-digit {
+  position: absolute;
+  left: 10%;
+}
+
 .sideFilter {
   width: 35% !important;
-    height: 100%;
-    background-color: white;
-    margin-left: 2rem;
-    margin-right: 1rem;
+  height: 100%;
+  background-color: white;
+  margin-left: 2rem;
+  margin-right: 1rem;
 }

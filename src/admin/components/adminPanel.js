@@ -1,56 +1,45 @@
 import React from 'react'
 import { Table } from "react-bootstrap";
+import { useSelector } from 'react-redux';
+import Data from '../../data/data.json'
+import { FaTrashAlt } from 'react-icons/fa';
+const AdminPanel = () => {
 
-const adminPanel = () => {
     return (
         <div>
             <div>Admin Panel, Welcome Walid.</div>
             <div className="container">
                 <div className="numberOfProducts">
                     <div>
-                        <div>total number of product is: 12</div>
+                        <div>total number of products is: {Data.length}</div>
                         <div>total number of users is: 12</div>
 
 
 
                     </div>
                 </div>
-                <div className="productOrders">
+                <div className="productsList">
 
                     <Table striped bordered hover size="sm">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>Product name</th>
+                                <th className="delete-trash-container">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
                                 <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <th className="delete-trash-container"><FaTrashAlt className="delete-trash" /></th>
+
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td colSpan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+
                         </tbody>
                     </Table>
                 </div>
-                <div className="productOfTheMonth">
-                    <div>the most favorite product:</div>
-                    <div>jean rouge</div>
-                </div>
+
             </div>
             <div className="orders">
                 <div>
@@ -63,7 +52,7 @@ const adminPanel = () => {
                                 <th>address 1</th>
                                 <th>address 2</th>
                                 <th>phone number</th>
-                                <th>Delete</th>
+                                <th className="delete-trash-container">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,7 +63,7 @@ const adminPanel = () => {
                                 <td>cite des annassers</td>
                                 <th>kouba alger</th>
                                 <th>0553757317</th>
-                                <th>Delete</th>
+                                <th className="delete-trash-container"><FaTrashAlt className="delete-trash" /></th>
                             </tr>
 
                         </tbody>
@@ -85,4 +74,4 @@ const adminPanel = () => {
     )
 }
 
-export default adminPanel
+export default AdminPanel

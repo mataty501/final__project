@@ -6,18 +6,64 @@ import 'reactjs-popup/dist/index.css';
 import ProductPopup from './sub-components/ProductPopup';
 import Data from '../data/data.json'
 import { useSelector } from 'react-redux'
+import { FaPlus, FaSearch, FaHeart, FaShoppingBag, FaUserAlt } from 'react-icons/fa';
+import Fav from './sub-components/Fav';
+import Shop from './sub-components/Shop';
+import User from './sub-components/User';
+import AddProduct from './sub-components/AddProduct'
+import whenScroll from 'when-scroll/src/when-scroll'
+import { MAXMIN } from '../Redux/Actions/actions';
+import { useDispatch } from 'react-redux';
+
 
 const Products = () => {
     const [filtredData, setFiltredData] = useState(Data);
-    const search = useSelector(state => state.Search.search);
+    const search = useSelector(state => state.Filter.search);
+    const price_range = useSelector(state => state.Filter.price);
+    //const [price_range, setPrice] = useState(state => state.Filter.price);
+    let min = price_range[0];
+    let max = price_range[1]
+
+
+    const [show_plus, setShow_plus] = useState(false);
+    const handleClose_plus = (e) => { e.stopPropagation(); setShow_plus(false); }
+    const handleShow_plus = (e) => { e.stopPropagation(); setShow_plus(true); }
+    const closePopup_plus = () => { setShow_plus(false); }
+
+    //Find min & max:
+    let max_price = Math.max.apply(Math, Data.map(function (e) { return e.price; }))
+    let min_price = Math.min.apply(Math, Data.map(function (e) { return e.price; }))
+
+
+
+    const dispatch = useDispatch();
+
+    dispatch({
+        type: MAXMIN,
+        payload: { min: min_price, max: max_price }
+    })
+
+
+
 
     useEffect(() => {
-        const dataFiltred = search.length && search[0].search !== '' ? filtredData.filter((elm) => {
-            console.log(search[0].search)
-            return elm.title.toLowerCase().startsWith(search[0].search)
+        let dataFiltred = search !== '' ? Data.filter((elm) => {
+            console.log(search)
+            return elm.title.toLowerCase().includes(search)
         }) : Data;
         setFiltredData(dataFiltred)
-    }, [search])
+
+        setFiltredData(dataFiltred.filter((x) => { return x.price < max && x.price > min }))
+
+        console.log(price_range)
+
+
+
+    }, [search, price_range])
+
+
+
+
 
     return (
         <div className="products__container">
@@ -35,7 +81,17 @@ const Products = () => {
 
                 </div>
             </div>
+            <div className="addProductButton" onClick={(e) => handleShow_plus(e)}>
+                <FaPlus />
+
+
+            </div>
+            <AddProduct show={show_plus}
+                close={handleClose_plus}
+                closePopup={closePopup_plus} />
+
         </div>
+
     )
 }
 

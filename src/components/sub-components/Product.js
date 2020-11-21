@@ -4,23 +4,38 @@ import { useDispatch } from 'react-redux';
 import New from './New';
 import ProductPopup from './ProductPopup';
 import { FaHeart, FaCartArrowDown } from 'react-icons/fa';
-import { ADD_CART, ADD_FAV } from '../../Redux/Actions/actions';
+import { ADD_CART, ADD_FAV, REMOVE_FAV } from '../../Redux/Actions/actions';
 
 const Product = (props) => {
     const [show, setShow] = useState(false);
-    const handleClose = (e) => { e.stopPropagation(); setShow(false); console.log("close") }
-    const handleShow = (e) => { e.stopPropagation(); setShow(true); console.log("show") }
-    const closePopup = () => { setShow(false); console.log("pop") }
+    const handleClose = (e) => { e.stopPropagation(); setShow(false); }
+    const handleShow = (e) => { e.stopPropagation(); setShow(true); }
+    const closePopup = () => { setShow(false); }
+    const [activeClassFav, setActiveClassFav] = useState(true);
+    const [activeClassCart, setActiveClassCart] = useState(true);
+
 
     const dispatch = useDispatch();
     const redux_fav = () => {
-        dispatch({
-            type: ADD_FAV,
-            payload: { id: props.id, name: props.title }
-        })
+        if (activeClassFav)
+            dispatch({
+                type: ADD_FAV,
+                payload: { id: props.id, name: props.title }
+            })
+        else
+            dispatch({
+                type: REMOVE_FAV,
+                payload: { id: props.id, name: props.title }
+            })
     }
 
     const redux_cart = () => {
+        dispatch({
+            type: ADD_CART,
+            payload: { id: props.id, name: props.title }
+        })
+    }
+    const redux_uncart = () => {
         dispatch({
             type: ADD_CART,
             payload: { id: props.id, name: props.title }
@@ -37,17 +52,19 @@ const Product = (props) => {
                 <div className="card-body-func">
                     <div>
                         <Card.Title>{props.title}</Card.Title>
-                        <div>{props.price}</div>
+                        <div>{props.price}<span>€</span></div>
                     </div>
                     <div>
                         <div className="product-options" >
-                            <FaHeart onClick={(e) => {
+                            <FaHeart className={activeClassFav ? "none-active-fav" : "active-fav"} onClick={(e) => {
                                 e.stopPropagation();
+                                setActiveClassFav(!activeClassFav);
                                 redux_fav();
 
                             }} />
-                            <FaCartArrowDown onClick={(e) => {
+                            <FaCartArrowDown className={activeClassCart ? "none-active-cart" : "active-cart"} onClick={(e) => {
                                 e.stopPropagation()
+                                setActiveClassCart(!activeClassCart);
                                 redux_cart();
                             }} />
                         </div>

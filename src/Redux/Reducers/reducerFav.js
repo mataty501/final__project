@@ -1,5 +1,5 @@
 //import { ADD_CART } from "../Actions/counterActions";
-import { ADD_FAV } from "../Actions/actions";
+import { ADD_FAV, REMOVE_FAV } from "../Actions/actions";
 
 const initialState = { fav: [] };
 
@@ -14,6 +14,16 @@ const reducerFav = (state = initialState, action) => {
       else {
         return { fav: [...state.fav] }
       }
+
+
+    case REMOVE_FAV:
+      const newFav = state.fav.filter((elem) => elem.id !== action.payload.id)
+
+
+      return { fav: [...newFav] };
+
+
+
     default:
       return state;
   }

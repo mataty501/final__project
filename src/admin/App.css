@@ -15,6 +15,14 @@
   align-items: flex-start;
   align-self: stretch;
 }
+.delete-trash {
+  cursor: pointer;
+}
+
+.delete-trash-container {
+  display: flex;
+  justify-content: center;
+}
 
 .orders {
   width: 70rem;
@@ -30,8 +38,8 @@
   margin: 1rem;
 }
 
-.productOrders {
-  width: 20rem;
+.productsList {
+  width: 45rem;
   height: 15rem;
   border: 2px solid grey;
   margin: 1rem;

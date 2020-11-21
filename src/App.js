@@ -3,6 +3,7 @@ import Filter from './components/Filter';
 import Products from './components/Products';
 import Footer from './components/Footer'
 import './App.css';
+import './App-mediaQueries.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -18,9 +19,9 @@ function App() {
     <>
       <Link to="/Admin">Admin</Link>
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <div className="App">
-            <Nav />
+            {/*<Nav />*/}
             <Filter />
             <Products />
             <Footer />
