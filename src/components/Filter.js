@@ -9,8 +9,8 @@ import { SEARCH } from '../Redux/Actions/actions'
 import User from './sub-components/User';
 import Fav from './sub-components/Fav';
 import Shop from './sub-components/Shop';
-import Data from '../data/data.json'
-import { useSelector } from 'react-redux'
+import Data from '../data/data.json';
+import { useSelector } from 'react-redux';
 const Filter = () => {
     const [search, setSearch] = useState("");
 
@@ -19,21 +19,22 @@ const Filter = () => {
     const cart_list = useSelector(state => state.Add.cart.length)
 
     const [show, setShow] = useState(false);
-    const handleClose = (e) => { e.stopPropagation(); setShow(false); console.log("close") }
-    const handleShow = (e) => { e.stopPropagation(); setShow(true); console.log("show") }
-    const closePopup = () => { setShow(false); console.log("pop") }
+    const handleClose = (e) => { e.stopPropagation(); setShow(false); }
+    const handleShow = (e) => { e.stopPropagation(); setShow(true); }
+    const closePopup = () => { setShow(false); }
 
     const [show_fav, setShow_fav] = useState(false);
-    const handleClose_fav = (e) => { e.stopPropagation(); setShow_fav(false); console.log("close") }
-    const handleShow_fav = (e) => { e.stopPropagation(); setShow_fav(true); console.log("show") }
-    const closePopup_fav = () => { setShow_fav(false); console.log("pop") }
+    const handleClose_fav = (e) => { e.stopPropagation(); setShow_fav(false); }
+    const handleShow_fav = (e) => { e.stopPropagation(); setShow_fav(true); }
+    const closePopup_fav = () => { setShow_fav(false); }
 
     const [show_shop, setShow_shop] = useState(false);
-    const handleClose_shop = (e) => { e.stopPropagation(); setShow_shop(false); console.log("close") }
-    const handleShow_shop = (e) => { e.stopPropagation(); setShow_shop(true); console.log("show") }
-    const closePopup_shop = () => { setShow_shop(false); console.log("pop") }
+    const handleClose_shop = (e) => { e.stopPropagation(); setShow_shop(false); }
+    const handleShow_shop = (e) => { e.stopPropagation(); setShow_shop(true); }
+    const closePopup_shop = () => { setShow_shop(false); }
 
     const dispatch = useDispatch();
+
 
     const handleSearch = () => {
 

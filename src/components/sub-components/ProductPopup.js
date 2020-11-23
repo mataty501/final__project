@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import Carousel from './Caroussel';
+import axios from 'axios';
 
 const ProductPopup = (props) => {
   //const [show, setShow] = useState(false);
@@ -9,6 +10,22 @@ const ProductPopup = (props) => {
   //const handleShow = () => setShow(true);
   const setPropertyOnPopup = () => {
     //call this function to 
+  }
+
+  const [name, setName] = useState();
+  const [address, setAddress] = useState();
+  const [number, setNumber] = useState();
+
+  const order = async (e) => {
+    e.preventDefault()
+    const data = {
+
+      name: name,
+      address: address,
+      phoneNumber: number
+    };
+    const response = await axios.post('http://localhost:5000/makeOrder', data)
+    console.log(response)
   }
   return (
 
@@ -34,21 +51,17 @@ const ProductPopup = (props) => {
               <Form>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Complete name:</Form.Label>
-                  <Form.Control type="text" placeholder="Enter your complete name" />
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address:</Form.Label>
-                  <Form.Control type="text" placeholder="Enter your complete name" />
+                  <Form.Control onChange={(e) => { setName(e.target.value) }} type="text" placeholder="Enter your complete name" />
                 </Form.Group>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Ligne d'adresse:</Form.Label>
-                  <Form.Control type="email" placeholder="Enter your address" />
+                  <Form.Control onChange={(e) => { setAddress(e.target.value) }} type="text" placeholder="Enter your address" />
                 </Form.Group>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Phone number:</Form.Label>
-                  <Form.Control type="email" placeholder="Enter your phone number" />
+                  <Form.Control onChange={(e) => { setNumber(e.target.value) }} type="text" placeholder="Enter your phone number" />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button onClick={(e) => order(e)} variant="primary" type="submit">
                   Order !
                 </Button>
               </Form>

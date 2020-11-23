@@ -12,9 +12,19 @@ import {
   Link
 } from "react-router-dom";
 import Admin from './admin/Admin';
-
+import axios from 'axios';
+import { useState, useEffect } from 'react'
 
 function App() {
+  const [products, setProducts] = useState()
+  useEffect(() => {
+    const getProducts = async () => {
+      const Data = await axios.get('http://localhost:5000/getProducts')
+      console.log('data below')
+      setProducts(Data.data)
+    }
+    getProducts()
+  }, [])
   return (
     <>
       <Link to="/Admin">Admin</Link>
@@ -23,7 +33,7 @@ function App() {
           <div className="App">
             {/*<Nav />*/}
             <Filter />
-            <Products />
+            <Products data={products ? products : ""} />
             <Footer />
           </div>
         </Route>

@@ -48,9 +48,8 @@ const AdminPanel = () => {
                             <tr>
                                 <th>#</th>
                                 <th>Full name</th>
-                                <th>email</th>
-                                <th>address 1</th>
-                                <th>address 2</th>
+                                <th>Product Name</th>
+                                <th>Address</th>
                                 <th>phone number</th>
                                 <th className="delete-trash-container">Delete</th>
                             </tr>
@@ -59,7 +58,7 @@ const AdminPanel = () => {
                             <tr>
                                 <td>1</td>
                                 <td>walid alioua</td>
-                                <td>alioua.walid1993@gmail.com</td>
+                                <td>Jean bleu</td>
                                 <td>cite des annassers</td>
                                 <th>kouba alger</th>
                                 <th>0553757317</th>

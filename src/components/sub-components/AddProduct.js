@@ -1,33 +1,51 @@
-import React, { useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
-import instance_axios from '../userRequests'
+import React, { useState } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap';
+import instance_axios from '../userRequests';
+import { useSelector } from 'react-redux';
+import { MDBInput } from 'mdbreact';
+import { faTruckMonster } from '@fortawesome/free-solid-svg-icons';
 
 const AddProduct = (props) => {
     const [title, setTitle] = useState();
     const [image, setImage] = useState();
     const [price, setPrice] = useState();
+    const [newProduct, setNewProduct] = useState(false);
     const [description, setDescription] = useState();
+    const [gender, setGender] = useState('Male');
 
-    const data = {
-        title: title,
 
-        price: price,
-        description: description
-    }
+    const btnShow = useSelector(state => state.User.showBtn);
 
-    const sendData = async (e) => {
-        e.preventDefault()
-        const response = await instance_axios.post('/addProduct', data)
-        console.log(response)
+    const handleSend = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("name", title);
+        formData.append("picture", image);
+        formData.append("price", price);
+        formData.append("newProduct", newProduct);
+        formData.append("description", description);
+        formData.append("gender", gender);
 
-    }
+        const response = await instance_axios.post("http://localhost:5000/addProduct",
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+        console.log(image.name);
+    };
+
+
+
     return (
         <div>
 
 
-            <Modal className="modal_subscribe" show={props.show} onClick={(e) => e.stopPropagation()} onHide={() => props.closePopup()}>
+            {btnShow && <Modal className="modal_subscribe" show={props.show} onClick={(e) => e.stopPropagation()} onHide={() => props.closePopup()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Upload your product</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -37,10 +55,13 @@ const AddProduct = (props) => {
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Image</Form.Label>
-                            <Form.File
-
+                            <Form.Control
+                                type="file"
                                 id="custom-file"
+                                name="file"
                                 label="Custom file input"
+
+                                onChange={(e) => { setImage(e.target.files[0]) }}
                                 custom
                             />
                         </Form.Group>
@@ -50,23 +71,42 @@ const AddProduct = (props) => {
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control onChange={(e) => { setDescription(e.target.value) }} type="text" placeholder="Write down the product description" />
+                            <MDBInput onChange={(e) => { setDescription(e.target.value) }} type="textarea" placeholder="Write down the product description" type="textarea" rows="2" />
+                        </Form.Group>
+                        <Form.Group controlId="exampleForm.ControlSelect1">
+                            <Form.Label>Select Gender</Form.Label>
+                            <Form.Control onChange={(e) => { setGender(e.target.value) }} as="select">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group>
+                            {['checkbox'].map((type) => (
+                                <div key={`default-${type}`} className="mb-3">
+                                    <Form.Check
+                                        unChecked
+                                        onClick={() => setNewProduct(!newProduct)}
+                                        type={type}
+                                        id={`default-${type}`}
+                                        label={'New product'}
+                                    />
+                                </div>
+                            ))}
                         </Form.Group>
 
 
 
-                        <Button onClick={(e) => { sendData(e) }} variant="primary" type="submit">
+                        <Button onClick={(e) => { handleSend(e) }} variant="primary" type="submit">
                             Submit
                         </Button>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={(e) => props.close(e)}>
-                        Close
-                    </Button>
+
                 </Modal.Footer>
-            </Modal>
-        </div>
+
+            </Modal>}
+        </div >
     );
 
 }

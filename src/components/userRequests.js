@@ -19,8 +19,9 @@ instance.interceptors.response.use(async (res) => {
                 authorization: `Bearer ${refreshToken}`
             }
         });
+        console.log(response.data.token)
         localStorage.setItem("token", response.data.token)
-        const newRes = instance.post(res.config.url)
+        const newRes = instance.post(res.config.url,)
         return newRes;
     }
     return res

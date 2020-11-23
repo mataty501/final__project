@@ -11,18 +11,20 @@ import Fav from './sub-components/Fav';
 import Shop from './sub-components/Shop';
 import User from './sub-components/User';
 import AddProduct from './sub-components/AddProduct'
-import whenScroll from 'when-scroll/src/when-scroll'
 import { MAXMIN } from '../Redux/Actions/actions';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 
-const Products = () => {
+const Products = (props) => {
+    //const Data = props.data 
     const [filtredData, setFiltredData] = useState(Data);
     const search = useSelector(state => state.Filter.search);
     const price_range = useSelector(state => state.Filter.price);
     //const [price_range, setPrice] = useState(state => state.Filter.price);
     let min = price_range[0];
     let max = price_range[1]
+
 
 
     const [show_plus, setShow_plus] = useState(false);
@@ -35,6 +37,7 @@ const Products = () => {
     let min_price = Math.min.apply(Math, Data.map(function (e) { return e.price; }))
 
 
+    const btnShow = useSelector(state => state.User.showBtn);
 
     const dispatch = useDispatch();
 
@@ -42,9 +45,6 @@ const Products = () => {
         type: MAXMIN,
         payload: { min: min_price, max: max_price }
     })
-
-
-
 
     useEffect(() => {
         let dataFiltred = search !== '' ? Data.filter((elm) => {
@@ -54,11 +54,6 @@ const Products = () => {
         setFiltredData(dataFiltred)
 
         setFiltredData(dataFiltred.filter((x) => { return x.price < max && x.price > min }))
-
-        console.log(price_range)
-
-
-
     }, [search, price_range])
 
 
@@ -81,11 +76,9 @@ const Products = () => {
 
                 </div>
             </div>
-            <div className="addProductButton" onClick={(e) => handleShow_plus(e)}>
+            {btnShow && <div className="addProductButton" onClick={(e) => handleShow_plus(e)}>
                 <FaPlus />
-
-
-            </div>
+            </div>}
             <AddProduct show={show_plus}
                 close={handleClose_plus}
                 closePopup={closePopup_plus} />

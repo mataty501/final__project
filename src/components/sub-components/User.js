@@ -1,19 +1,38 @@
-import React, { useState } from 'react'
-import { Modal, Button, Form, Tabs, Tab } from 'react-bootstrap'
-import axios from 'axios'
+import React, { useState } from 'react';
+import { Modal, Button, Form, Tabs, Tab } from 'react-bootstrap';
+import axios from 'axios';
+import { SHOWADDBTN } from '../../Redux/Actions/actions'
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const User = (props) => {
   const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [password1, setPassword1] = useState()
+  const [password2, setPassword2] = useState()
+  const [error, setError] = useState()
+
+  const dispatch = useDispatch();
+  const showBtn = () => {
+    dispatch({
+      type: SHOWADDBTN,
+      payload: { showBtn: true }
+    })
+  }
 
   const sendData = async (e) => {
     e.preventDefault()
-    const data = {
-      username: email,
-      password: password
-    };
-    const response = await axios.post('http://localhost:5000/signup', data)
-    console.log(data)
+    if (password1 === password2) {
+      setError('')
+      const data = {
+        username: email,
+        password: password1
+      };
+      const response = await axios.post('http://localhost:5000/signup', data)
+      console.log(data)
+    }
+    else {
+      setError('Password isn\'t the same, please retape your password')
+    }
   }
 
   const signIn = async (e) => {
@@ -21,7 +40,7 @@ const User = (props) => {
     {/*send data*/ }
     const data = {
       username: email,
-      password: password
+      password: password1
     };
     const response = await axios.post('http://localhost:5000/login', data)
 
@@ -34,6 +53,8 @@ const User = (props) => {
     console.log(localStorage.getItem('token'))
 
   }
+
+  const btnShow = useSelector(state => state.User.showBtn);
 
   return (
     <div>
@@ -57,13 +78,17 @@ const User = (props) => {
 
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control onChange={(e) => { setPassword(e.target.value) }} type="password" placeholder="Password" />
+                  <Form.Control onChange={(e) => { setPassword1(e.target.value) }} type="password" placeholder="Password" />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                <Button onClick={(e) => signIn(e)} variant="primary" type="submit">
+                <Button onClick={(e) => {
+                  signIn(e);
+                  showBtn()
+                }
+                } variant="primary" type="submit">
                   Login
                 </Button>
               </Form>
@@ -81,16 +106,17 @@ const User = (props) => {
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Label>set a Password</Form.Label>
+                  <Form.Control onChange={(e) => { setPassword1(e.target.value) }} type="password" placeholder="Password" />
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control onChange={(e) => { setPassword(e.target.value) }} type="password" placeholder="Password" />
+                  <Form.Label>Rewrite your Password</Form.Label>
+                  <Form.Control onChange={(e) => { setPassword2(e.target.value) }} type="password" placeholder="Password" />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
+                <div className="subscribe-error">{error}</div>
                 <Button onClick={(e) => { sendData(e) }} variant="primary" type="submit">
                   Subscribe
                     </Button>
@@ -108,7 +134,7 @@ const User = (props) => {
                     </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div >
   );
 
 }

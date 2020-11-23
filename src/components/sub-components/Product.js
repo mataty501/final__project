@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import New from './New';
 import ProductPopup from './ProductPopup';
 import { FaHeart, FaCartArrowDown } from 'react-icons/fa';
-import { ADD_CART, ADD_FAV, REMOVE_FAV } from '../../Redux/Actions/actions';
+import { ADD_CART, REMOVE_CART, ADD_FAV, REMOVE_FAV } from '../../Redux/Actions/actions';
 
 const Product = (props) => {
     const [show, setShow] = useState(false);
@@ -13,6 +13,8 @@ const Product = (props) => {
     const closePopup = () => { setShow(false); }
     const [activeClassFav, setActiveClassFav] = useState(true);
     const [activeClassCart, setActiveClassCart] = useState(true);
+
+
 
 
     const dispatch = useDispatch();
@@ -30,16 +32,16 @@ const Product = (props) => {
     }
 
     const redux_cart = () => {
-        dispatch({
-            type: ADD_CART,
-            payload: { id: props.id, name: props.title }
-        })
-    }
-    const redux_uncart = () => {
-        dispatch({
-            type: ADD_CART,
-            payload: { id: props.id, name: props.title }
-        })
+        if (activeClassCart)
+            dispatch({
+                type: ADD_CART,
+                payload: { id: props.id, name: props.title }
+            })
+        else
+            dispatch({
+                type: REMOVE_CART,
+                payload: { id: props.id, name: props.title }
+            })
     }
 
     return (

@@ -13,5 +13,5 @@ export const GENDER = "GENDER";
 export const MAXMIN = "MAXMIN";
 
 //Show hidden addProduct to loged user
-export const showAddBtn = "SHOWADDBTN";
+export const SHOWADDBTN = "SHOWADDBTN";
 

@@ -244,3 +244,9 @@
   margin-left: 2rem;
   margin-right: 1rem;
 }
+
+.subscribe-error {
+  width: 90%;
+  margin: 1rem auto 1rem;
+  background-color: rgba(255, 0, 0, 0.178);
+}
