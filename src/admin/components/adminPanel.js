@@ -1,18 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from "react-bootstrap";
 import { useSelector } from 'react-redux';
 import Data from '../../data/data.json'
 import { FaTrashAlt } from 'react-icons/fa';
+import axios from 'axios';
 const AdminPanel = () => {
+    const [dataOrders, setDataOrders] = useState()
+    const [dataProducts, setDataProducts] = useState()
+    const [dataUsers, setDataUsers] = useState()
+
+
+    const deleteOrder = async (id) => {
+        const response = await axios.delete(`http://localhost:5000/deleteOrder/${id}`);
+    }
+    const deleteProduct = async (id) => {
+        const response = await axios.delete(`http://localhost:5000/deleteProduct/${id}`);
+    }
+    useEffect(() => {
+
+        const showOrders = async () => {
+            const response = await axios.get('http://localhost:5000/showOrders');
+            setDataOrders(response.data)
+        }
+        const showProducts = async () => {
+            const response = await axios.get('http://localhost:5000/getProducts');
+            setDataProducts(response.data)
+        }
+
+        const showUsers = async () => {
+            const response = await axios.get('http://localhost:5000/getUsers');
+            setDataUsers(response.data)
+        }
+
+
+
+        showOrders()
+        showProducts()
+        showUsers()
+
+    }, [deleteOrder])
+
+    //console.log(dataProducts)
 
     return (
         <div>
+
             <div>Admin Panel, Welcome Walid.</div>
             <div className="container">
                 <div className="numberOfProducts">
                     <div>
-                        <div>total number of products is: {Data.length}</div>
-                        <div>total number of users is: 12</div>
+                        <div>Total number of products is: {dataProducts && dataProducts.length}</div>
+                        <div>Total number of orders is: {dataOrders && dataOrders.length}</div>
+                        <div>Total number of users is: {dataUsers && dataUsers.length}</div>
 
 
 
@@ -23,19 +62,23 @@ const AdminPanel = () => {
                     <Table striped bordered hover size="sm">
                         <thead>
                             <tr>
-                                <th>#</th>
+
                                 <th>Product name</th>
+                                <th>Price</th>
                                 <th className="delete-trash-container">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <th className="delete-trash-container"><FaTrashAlt className="delete-trash" /></th>
+                            {dataProducts && dataProducts.map((e) => {
+                                return (<tr>
 
-                            </tr>
-
+                                    <td>{e.title}</td>
+                                    <td>{e.price}</td>
+                                    <th className="delete-trash-container">
+                                        <FaTrashAlt onClick={() => { deleteProduct(e._id) }} className="delete-trash" />
+                                    </th>
+                                </tr>)
+                            })}
                         </tbody>
                     </Table>
                 </div>
@@ -45,31 +88,37 @@ const AdminPanel = () => {
                 <div>
                     <Table striped bordered hover size="sm">
                         <thead>
+
                             <tr>
-                                <th>#</th>
-                                <th>Full name</th>
+
+
+
+                                <th>Full Name</th>
                                 <th>Product Name</th>
                                 <th>Address</th>
                                 <th>phone number</th>
                                 <th className="delete-trash-container">Delete</th>
                             </tr>
+
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>walid alioua</td>
-                                <td>Jean bleu</td>
-                                <td>cite des annassers</td>
-                                <th>kouba alger</th>
-                                <th>0553757317</th>
-                                <th className="delete-trash-container"><FaTrashAlt className="delete-trash" /></th>
-                            </tr>
 
+                            {dataOrders && dataOrders.map((e) => {
+                                return (<tr>
+
+
+                                    <td>{e.name}</td>
+                                    <td>{e._id}</td>
+                                    <td>{e.address}</td>
+                                    <th>{e.phoneNumber}</th>
+                                    <th className="delete-trash-container"><FaTrashAlt onClick={() => { deleteOrder(e._id) }} className="delete-trash" /></th>
+                                </tr>)
+                            })}
                         </tbody>
                     </Table>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -3,7 +3,7 @@ import { SEARCH, GENDER, PRICE } from "../Actions/actions";
 // const initialState = { search: [] };
 
 
-const initialState = { search: "", gender: "", price: [0, 500] };
+const initialState = { search: "", gender: "", price: [0, 5000] };
 const reducerFilter = (state = initialState, action) => {
 
     switch (action.type) {/*

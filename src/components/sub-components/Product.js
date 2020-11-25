@@ -14,8 +14,7 @@ const Product = (props) => {
     const [activeClassFav, setActiveClassFav] = useState(true);
     const [activeClassCart, setActiveClassCart] = useState(true);
 
-
-
+    console.log(props.description)
 
     const dispatch = useDispatch();
     const redux_fav = () => {
@@ -46,10 +45,10 @@ const Product = (props) => {
 
     return (
 
-        <Card onClick={(e) => handleShow(e)} className="product" style={{ width: '18rem' }} >
+        <Card onClick={(e) => handleShow(e)} className="product" style={{ width: '17.8rem', height: '28rem' }} >
 
             {props.new && <div><New /></div>}
-            <Card.Img variant="top" src={props.image} />
+            {props.image && <Card.Img variant="top" src={`http://localhost:5000/images/${props.image}`} />}
             <Card.Body>
                 <div className="card-body-func">
                     <div>
@@ -72,6 +71,10 @@ const Product = (props) => {
                         </div>
                         <div className="product-popup">
                             <ProductPopup
+                                id={props.id}
+                                title={props.title}
+                                urlArray={props.urlArray}
+                                description={props.description}
                                 show={show}
                                 close={handleClose}
                                 closePopup={closePopup}

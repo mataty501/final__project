@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Accordion, Card, Button, Form } from 'react-bootstrap';
 import Range from './Range'
 import { useDispatch } from 'react-redux';
-import { SEARCH } from '../../Redux/Actions/actions'
+import { GENDER } from '../../Redux/Actions/actions'
 
 
 const SideCategories = () => {
-  const [gender, setGender] = useState();
-
+  const [gender, setGender] = useState("");
+  const [checked, setChecked] = useState(true)
 
   const dispatch = useDispatch();
-  const genderFilter = () => {
-    dispatch({
-      type: SEARCH,
-      payload: { gender: gender }
-    })
-  }
+
+  useEffect(() => {
+    const genderFilter = () => {
+      dispatch({
+        type: GENDER,
+        payload: gender
+      })
+    }
+    genderFilter()
+  }, [gender])
+
 
   return (
     <div className="sideFilter">
@@ -31,17 +36,28 @@ const SideCategories = () => {
             <Card.Body>
               <Form>
                 <div key={`default-checkbox`} className="mb-3">
-                  <Form.Check onClick={() => setGender('male')}
-                    type={'checkbox'}
+                  <Form.Check onClick={() => { setGender(''); setChecked(true) }}
+                    type={'radio'}
                     id={`default-checkbox`}
-                    label={'Male'}
+                    label={'All'}
+                    name={"checkbox"}
+                    checked={checked}
                   />
                 </div>
                 <div key={`default-checkbox`} className="mb-3">
-                  <Form.Check onClick={() => setGender('female')}
-                    type={'checkbox'}
+                  <Form.Check onClick={() => { setGender('Male'); setChecked(false) }}
+                    type={'radio'}
+                    id={`default-checkbox`}
+                    label={'Male'}
+                    name={"checkbox"}
+                  />
+                </div>
+                <div key={`default-checkbox`} className="mb-3">
+                  <Form.Check onClick={() => { setGender('Female'); setChecked(false) }}
+                    type={'radio'}
                     id={`default-checkbox`}
                     label={'female'}
+                    name={"checkbox"}
 
                   />
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
-import Carousel from './Caroussel';
+import Caroussel from './Caroussel';
 import axios from 'axios';
 
 const ProductPopup = (props) => {
@@ -19,13 +19,13 @@ const ProductPopup = (props) => {
   const order = async (e) => {
     e.preventDefault()
     const data = {
-
+      id: props.id,
       name: name,
       address: address,
       phoneNumber: number
     };
     const response = await axios.post('http://localhost:5000/makeOrder', data)
-    console.log(response)
+    //console.log(response)
   }
   return (
 
@@ -34,19 +34,17 @@ const ProductPopup = (props) => {
       <div >
         <Modal contentClassName="modal-90w modal-dialog-w90" show={props.show} onClick={(e) => e.stopPropagation()} onHide={() => props.closePopup()}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>{props.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body className="product-body">
 
             <div className="product-body-carousel-description">
-              <Carousel />
+              <Caroussel id={props.id} urlArray={props.urlArray} />
               <div>aaa</div>
             </div>
 
             <div className="product-body-purchase">
-              <p>Lorem Ipsum, giving information on its origins, as well as a random Lipsum Lorem Ipsum,
-              giving information on its origins, as well as a random Lipsum Lorem Ipsum,
-                giving information on its origins, as well as a random Lipsum</p>
+              <p>{props.description}</p>
 
               <Form>
                 <Form.Group controlId="formBasicEmail">

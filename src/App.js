@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const getProducts = async () => {
       const Data = await axios.get('http://localhost:5000/getProducts')
-      console.log('data below')
+      //console.log(Data)
       setProducts(Data.data)
     }
     getProducts()
@@ -33,7 +33,7 @@ function App() {
           <div className="App">
             {/*<Nav />*/}
             <Filter />
-            <Products data={products ? products : ""} />
+            {products && <Products data={products} />}
             <Footer />
           </div>
         </Route>
