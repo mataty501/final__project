@@ -1,7 +1,6 @@
-
-import './App.css';
-import AdminPanel from './components/AdminPanel';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css'
+import "./App.css";
+import AdminPanel from "./components/adminPanel";
+import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 
 function App() {
   return (

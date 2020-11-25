@@ -15,3 +15,4 @@ export const MAXMIN = "MAXMIN";
 //Show hidden addProduct to loged user
 export const SHOWADDBTN = "SHOWADDBTN";
 
+export const ROLE = "ROLE";

@@ -1,66 +1,77 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form, Tabs, Tab } from 'react-bootstrap';
-import axios from 'axios';
-import { SHOWADDBTN } from '../../Redux/Actions/actions'
-import { useDispatch, useSelector } from 'react-redux';
-
+import React, { useState } from "react";
+import { Modal, Button, Form, Tabs, Tab } from "react-bootstrap";
+import axios from "axios";
+import { SHOWADDBTN, ROLE } from "../../Redux/Actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import instance from "../userRequests";
 
 const User = (props) => {
-  const [email, setEmail] = useState()
-  const [password1, setPassword1] = useState()
-  const [password2, setPassword2] = useState()
-  const [error, setError] = useState()
+  const [email, setEmail] = useState();
+  const [password1, setPassword1] = useState();
+  const [password2, setPassword2] = useState();
+  const [error, setError] = useState();
 
   const dispatch = useDispatch();
   const showBtn = () => {
     dispatch({
       type: SHOWADDBTN,
-      payload: { showBtn: true }
-    })
-  }
+      payload: { showBtn: true },
+    });
+  };
 
   const sendData = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (password1 === password2) {
-      setError('')
+      setError("");
       const data = {
         username: email,
-        password: password1
+        password: password1,
       };
-      const response = await axios.post('http://localhost:5000/signup', data)
-      console.log(data)
+      const response = await axios.post("http://localhost:5000/signup", data);
+
+      console.log(data);
+    } else {
+      setError("Password isn't the same, please retape your password");
     }
-    else {
-      setError('Password isn\'t the same, please retape your password')
-    }
-  }
+  };
 
   const signIn = async (e) => {
-    e.preventDefault()
-    {/*send data*/ }
+    e.preventDefault();
+    {
+      /*send data*/
+    }
     const data = {
       username: email,
-      password: password1
+      password: password1,
     };
-    const response = await axios.post('http://localhost:5000/login', data)
+    const response = await axios.post("http://localhost:5000/login", data);
 
-    {/*Save in localStorage*/ }
-    const refreshToken = response.data.refreshToken
-    const token = response.data.token
-    localStorage.setItem('refreshToken', refreshToken);
-    localStorage.setItem('token', token);
+    {
+      /*Save in localStorage*/
+    }
+    const refreshToken = response.data.refreshToken;
+    const token = response.data.token;
+    localStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem("token", token);
+    const admin = await instance.get("/isAdmin");
+    if (admin.data.message == "is admin") {
+      dispatch({
+        type: ROLE,
+      });
+    }
+    console.log(localStorage.getItem("token"));
+  };
 
-    console.log(localStorage.getItem('token'))
-
-  }
-
-  const btnShow = useSelector(state => state.User.showBtn);
+  const btnShow = useSelector((state) => state.User.showBtn);
 
   return (
     <div>
-
-
-      <Modal className="modal_subscribe" show={props.show} onClick={(e) => e.stopPropagation()} onHide={() => props.closePopup()}>
+      <Modal
+        className="modal_subscribe"
+        show={props.show}
+        onClick={(e) => e.stopPropagation()}
+        onHide={() => props.closePopup()}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
@@ -70,25 +81,40 @@ const User = (props) => {
               <Form>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Enter email" />
+                  <Form.Control
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    type="email"
+                    placeholder="Enter email"
+                  />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
-                      </Form.Text>
+                  </Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control onChange={(e) => { setPassword1(e.target.value) }} type="password" placeholder="Password" />
+                  <Form.Control
+                    onChange={(e) => {
+                      setPassword1(e.target.value);
+                    }}
+                    type="password"
+                    placeholder="Password"
+                  />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                <Button onClick={(e) => {
-                  signIn(e);
-                  showBtn()
-                }
-                } variant="primary" type="submit">
+                <Button
+                  onClick={(e) => {
+                    signIn(e);
+                    showBtn();
+                  }}
+                  variant="primary"
+                  type="submit"
+                >
                   Login
                 </Button>
               </Form>
@@ -99,30 +125,53 @@ const User = (props) => {
               <Form>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control onChange={(e) => { setEmail(e.target.value) }} type="email" placeholder="Enter email" />
+                  <Form.Control
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    type="email"
+                    placeholder="Enter email"
+                  />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
-                      </Form.Text>
+                  </Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>set a Password</Form.Label>
-                  <Form.Control onChange={(e) => { setPassword1(e.target.value) }} type="password" placeholder="Password" />
+                  <Form.Control
+                    onChange={(e) => {
+                      setPassword1(e.target.value);
+                    }}
+                    type="password"
+                    placeholder="Password"
+                  />
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Rewrite your Password</Form.Label>
-                  <Form.Control onChange={(e) => { setPassword2(e.target.value) }} type="password" placeholder="Password" />
+                  <Form.Control
+                    onChange={(e) => {
+                      setPassword2(e.target.value);
+                    }}
+                    type="password"
+                    placeholder="Password"
+                  />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
                 <div className="subscribe-error">{error}</div>
-                <Button onClick={(e) => { sendData(e) }} variant="primary" type="submit">
+                <Button
+                  onClick={(e) => {
+                    sendData(e);
+                  }}
+                  variant="primary"
+                  type="submit"
+                >
                   Subscribe
-                    </Button>
+                </Button>
               </Form>
             </Tab>
-
           </Tabs>
           {/*
           
@@ -131,12 +180,11 @@ const User = (props) => {
         <Modal.Footer>
           <Button variant="secondary" onClick={(e) => props.close(e)}>
             Close
-                    </Button>
+          </Button>
         </Modal.Footer>
       </Modal>
-    </div >
+    </div>
   );
+};
 
-}
-
-export default User
+export default User;
