@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import React from 'react'
+import { Modal, Button } from 'react-bootstrap'
 
 import { Table } from "react-bootstrap";
 import { FaTrashAlt } from 'react-icons/fa';
@@ -15,7 +15,7 @@ const Shop = (props) => {
         <Modal.Header closeButton>
           <Modal.Title>Shop Cart</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        {!!cart_list.length && <Modal.Body>
 
           <Table striped bordered hover size="sm">
             <thead>
@@ -40,7 +40,11 @@ const Shop = (props) => {
             </tbody>
           </Table>
 
-        </Modal.Body>
+        </Modal.Body>}
+        {!!!cart_list.length && (
+          <div className="fav-empty-msg">
+            List of shopping cart is currently empty
+          </div>)}
         <Modal.Footer>
           <Button variant="secondary" onClick={(e) => props.close(e)}>
             Close

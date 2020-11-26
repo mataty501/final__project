@@ -35,27 +35,27 @@ const SideCategories = () => {
           <Accordion.Collapse eventKey="0">
             <Card.Body>
               <Form>
-                <div key={`default-checkbox`} className="mb-3">
+                <div key={`default-checkbox-all`} className="mb-3">
                   <Form.Check onClick={() => { setGender(''); setChecked(true) }}
                     type={'radio'}
-                    id={`default-checkbox`}
+                    id={`default-checkbox-all`}
                     label={'All'}
                     name={"checkbox"}
                     checked={checked}
                   />
                 </div>
-                <div key={`default-checkbox`} className="mb-3">
+                <div key={`default-checkbox-male`} className="mb-3">
                   <Form.Check onClick={() => { setGender('Male'); setChecked(false) }}
                     type={'radio'}
-                    id={`default-checkbox`}
+                    id={`default-checkbox-male`}
                     label={'Male'}
                     name={"checkbox"}
                   />
                 </div>
-                <div key={`default-checkbox`} className="mb-3">
+                <div key={`default-checkbox-female`} className="mb-3">
                   <Form.Check onClick={() => { setGender('Female'); setChecked(false) }}
                     type={'radio'}
-                    id={`default-checkbox`}
+                    id={`default-checkbox-female`}
                     label={'female'}
                     name={"checkbox"}
 

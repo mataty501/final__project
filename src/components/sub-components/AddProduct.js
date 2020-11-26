@@ -31,7 +31,7 @@ const AddProduct = (props) => {
         formData.append("description", description);
         formData.append("gender", gender);
 
-        const response = await instance_axios.post("http://localhost:5000/addProduct",
+        const response = await instance_axios.post("https://fastshop-server.herokuapp.com/addProduct",
             formData,
             {
                 headers: {

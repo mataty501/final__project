@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import New from './New';
 import ProductPopup from './ProductPopup';
@@ -14,7 +14,7 @@ const Product = (props) => {
     const [activeClassFav, setActiveClassFav] = useState(true);
     const [activeClassCart, setActiveClassCart] = useState(true);
 
-    console.log(props.description)
+
 
     const dispatch = useDispatch();
     const redux_fav = () => {
@@ -48,7 +48,7 @@ const Product = (props) => {
         <Card onClick={(e) => handleShow(e)} className="product" style={{ width: '17.8rem', height: '28rem' }} >
 
             {props.new && <div><New /></div>}
-            {props.image && <Card.Img variant="top" src={`http://localhost:5000/images/${props.image}`} />}
+            {props.image && <Card.Img variant="top" src={`https://fastshop-server.herokuapp.com/images/${props.image}`} />}
             <Card.Body>
                 <div className="card-body-func">
                     <div>

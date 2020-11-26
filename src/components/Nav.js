@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { FaSearch, FaHeart, FaShoppingBag, FaUserAlt } from 'react-icons/fa';
+import { Nav, Navbar } from 'react-bootstrap';
+import { FaHeart, FaShoppingBag, FaUserAlt } from 'react-icons/fa';
 import Avatar from '@material-ui/core/Avatar/Avatar';
 import User from './sub-components/User';
 import Fav from './sub-components/Fav';
 import Shop from './sub-components/Shop';
-import { useReducer } from 'react';
+
 import { useSelector } from 'react-redux';
-import counterReducerFav from '../Redux/Reducers/reducerFav'
+
 
 const NavContainer = () => {
     const [show, setShow] = useState(false);

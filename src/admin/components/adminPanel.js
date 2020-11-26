@@ -8,40 +8,71 @@ const AdminPanel = () => {
   const [dataOrders, setDataOrders] = useState();
   const [dataProducts, setDataProducts] = useState();
   const [dataUsers, setDataUsers] = useState();
-
+  const [changes, setChanges] = useState(false);
+  /*
+    const deleteOrder = async (id) => {
+      const response = await axios.delete(
+        `http://localhost:5000/deleteOrder/${id}`
+      );
+    };
+    const deleteProduct = async (id) => {
+      const response = await axios.delete(
+        `http://localhost:5000/deleteProduct/${id}`
+      );
+    };
+    useEffect(() => {
+      const showOrders = async () => {
+        const response = await axios.get("http://localhost:5000/showOrders");
+        console.log(response.data);
+        setDataOrders(response.data);
+      };
+      const showProducts = async () => {
+        const response = await axios.get("http://localhost:5000/getProducts");
+        setDataProducts(response.data);
+      };
+  
+      const showUsers = async () => {
+        const response = await axios.get("http://localhost:5000/getUsers");
+        setDataUsers(response.data);
+      };
+  
+      showOrders();
+      showProducts();
+      showUsers();
+    }, [deleteOrder, deleteProduct]);
+  */
+  //console.log(dataProducts)
   const deleteOrder = async (id) => {
     const response = await axios.delete(
-      `http://localhost:5000/deleteOrder/${id}`
+      `https://fastshop-server.herokuapp.com/deleteOrder/${id}`
     );
+    setChanges(!changes);
   };
   const deleteProduct = async (id) => {
     const response = await axios.delete(
-      `http://localhost:5000/deleteProduct/${id}`
+      `https://fastshop-server.herokuapp.com/deleteProduct/${id}`
     );
+    setChanges(!changes);
   };
+
   useEffect(() => {
     const showOrders = async () => {
-      const response = await axios.get("http://localhost:5000/showOrders");
+      const response = await axios.get("https://fastshop-server.herokuapp.com/showOrders");
       console.log(response.data);
       setDataOrders(response.data);
     };
     const showProducts = async () => {
-      const response = await axios.get("http://localhost:5000/getProducts");
+      const response = await axios.get("https://fastshop-server.herokuapp.com/getProducts");
       setDataProducts(response.data);
     };
-
     const showUsers = async () => {
-      const response = await axios.get("http://localhost:5000/getUsers");
+      const response = await axios.get("https://fastshop-server.herokuapp.com/getUsers");
       setDataUsers(response.data);
     };
-
     showOrders();
     showProducts();
     showUsers();
-  }, [deleteOrder, deleteProduct]);
-
-  //console.log(dataProducts)
-
+  }, [changes]);
   return (
     <div>
       <div>Admin Panel, Welcome Walid.</div>

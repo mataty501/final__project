@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import React from 'react'
+import { Modal, Button } from 'react-bootstrap'
 import { Table } from "react-bootstrap";
 import { FaTrashAlt } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 const Fav = (props) => {
   const fav_list = useSelector(state => state.Fav.fav)
+
 
 
 

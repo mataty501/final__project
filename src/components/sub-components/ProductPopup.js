@@ -24,7 +24,7 @@ const ProductPopup = (props) => {
       address: address,
       phoneNumber: number,
     };
-    const response = await axios.post("http://localhost:5000/makeOrder", data);
+    const response = await axios.post("https://fastshop-server.herokuapp.com/makeOrder", data);
     if (response) {
       setOrdered(!ordered)
     }

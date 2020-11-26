@@ -2,15 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Admin from './admin/Admin'
 import reportWebVitals from './reportWebVitals';
 import store from './Redux/Store/store';
 import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
 } from "react-router-dom";
 
 

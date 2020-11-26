@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button, Form, Tabs, Tab } from "react-bootstrap";
 import axios from "axios";
 import { SHOWADDBTN, ROLE } from "../../Redux/Actions/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import instance from "../userRequests";
 
 const User = (props) => {
@@ -34,7 +34,7 @@ const User = (props) => {
         username: email,
         password: password1,
       };
-      const response = await axios.post("http://localhost:5000/signup", data);
+      const response = await axios.post("https://fastshop-server.herokuapp.com/signup", data);
       response && setSignedUp(!signedUp)
       setError("Password isn't the same, please retape your password");
     }
@@ -50,10 +50,16 @@ const User = (props) => {
       username: email,
       password: password1,
     };
-    const response = await axios.post("http://localhost:5000/login", data);
+    const response = await axios.post("https://fastshop-server.herokuapp.com/login", data);
     if (response) {
       showBtn()
     }
+
+    if (response.data.message == "Bad credentials") {
+      console.log('hi')
+    }
+
+
     response && setSignedIn(!signedIn)
 
 
@@ -65,12 +71,15 @@ const User = (props) => {
     localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem("token", token);
     const admin = await instance.get("/isAdmin");
+
+
+
     if (admin.data.message == "is admin") {
       dispatch({
         type: ROLE,
       });
     }
-    console.log(localStorage.getItem("token"));
+    //console.log(localStorage.getItem("token"));
   };
 
   //const btnShow = useSelector((state) => state.User.showBtn);
@@ -132,7 +141,7 @@ const User = (props) => {
               </Form>}
               {signedIn && <Form>
                 <div className="signed-in-msg">
-                  <div>You've succesfully loged-in ! Please add your products</div>
+                  <div>You've succesfully logged-in ! Please add your products</div>
                 </div>
               </Form>
               }

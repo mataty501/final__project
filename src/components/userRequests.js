@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: "http://localhost:5000"
+    baseURL: "https://fastshop-server.herokuapp.com/"
 })
 
 instance.interceptors.request.use((req) => {
@@ -14,7 +14,7 @@ instance.interceptors.request.use((req) => {
 const refreshToken = localStorage.getItem("refreshToken");
 instance.interceptors.response.use(async (res) => {
     if (res.data.message === "TokenExpired") {
-        const response = await axios.get("http://localhost:5000/token", {
+        const response = await axios.get("https://fastshop-server.herokuapp.com/token", {
             headers: {
                 authorization: `Bearer ${refreshToken}`
             }
