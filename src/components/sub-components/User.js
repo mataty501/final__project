@@ -11,14 +11,21 @@ const User = (props) => {
   const [password2, setPassword2] = useState();
   const [error, setError] = useState();
 
+  const [signedUp, setSignedUp] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
   const dispatch = useDispatch();
-  const showBtn = () => {
+
+
+  /**/const showBtn = () => {
+
     dispatch({
       type: SHOWADDBTN,
       payload: { showBtn: true },
     });
   };
 
+  /*****/
   const sendData = async (e) => {
     e.preventDefault();
     if (password1 === password2) {
@@ -28,13 +35,12 @@ const User = (props) => {
         password: password1,
       };
       const response = await axios.post("http://localhost:5000/signup", data);
-
-      console.log(data);
-    } else {
+      response && setSignedUp(!signedUp)
       setError("Password isn't the same, please retape your password");
     }
   };
 
+  /****/
   const signIn = async (e) => {
     e.preventDefault();
     {
@@ -45,6 +51,11 @@ const User = (props) => {
       password: password1,
     };
     const response = await axios.post("http://localhost:5000/login", data);
+    if (response) {
+      showBtn()
+    }
+    response && setSignedIn(!signedIn)
+
 
     {
       /*Save in localStorage*/
@@ -62,7 +73,7 @@ const User = (props) => {
     console.log(localStorage.getItem("token"));
   };
 
-  const btnShow = useSelector((state) => state.User.showBtn);
+  //const btnShow = useSelector((state) => state.User.showBtn);
 
   return (
     <div>
@@ -73,12 +84,12 @@ const User = (props) => {
         onHide={() => props.closePopup()}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Sign In / Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
             <Tab eventKey="home" title="Sign In">
-              <Form>
+              {!signedIn && <Form>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
@@ -110,19 +121,26 @@ const User = (props) => {
                 <Button
                   onClick={(e) => {
                     signIn(e);
-                    showBtn();
+
+
                   }}
                   variant="primary"
                   type="submit"
                 >
                   Login
                 </Button>
+              </Form>}
+              {signedIn && <Form>
+                <div className="signed-in-msg">
+                  <div>You've succesfully loged-in ! Please add your products</div>
+                </div>
               </Form>
+              }
             </Tab>
 
-            {/**/}
+            {/*signedUp*/}
             <Tab eventKey="profile" title="Sign up">
-              <Form>
+              {!signedUp && <Form>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
@@ -164,13 +182,22 @@ const User = (props) => {
                 <Button
                   onClick={(e) => {
                     sendData(e);
+
                   }}
                   variant="primary"
                   type="submit"
                 >
-                  Subscribe
+                  Sign up
                 </Button>
-              </Form>
+              </Form>}
+              {signedUp &&
+                <Form>
+                  <div className="signed-in-msg">
+                    <div>Success! please, sign in now!</div>
+                  </div>
+                </Form>
+
+              }
             </Tab>
           </Tabs>
           {/*

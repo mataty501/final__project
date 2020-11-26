@@ -70,7 +70,7 @@ const SideCategories = () => {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              Price1
+              Price range
       </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">

@@ -62,7 +62,7 @@ const Filter = () => {
 
                 <Nav className="nav-filter">
                     <Nav.Link href="#deets">
-                        <User className="user" show={show}
+                        <User show={show}
                             close={handleClose}
                             closePopup={closePopup}
                         />

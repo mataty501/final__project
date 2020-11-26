@@ -38,7 +38,7 @@ const AdminPanel = () => {
     showOrders();
     showProducts();
     showUsers();
-  }, []);
+  }, [deleteOrder, deleteProduct]);
 
   //console.log(dataProducts)
 

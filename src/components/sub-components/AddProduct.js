@@ -17,6 +17,7 @@ const AddProduct = (props) => {
 
 
     const btnShow = useSelector(state => state.User.showBtn);
+    const [upload, setUpload] = useState(true);
 
     const handleSend = async (e) => {
         e.preventDefault();
@@ -38,7 +39,9 @@ const AddProduct = (props) => {
                 },
             }
         );
-
+        if (response) {
+            setUpload(!upload)
+        }
     };
 
 
@@ -52,7 +55,7 @@ const AddProduct = (props) => {
                     <Modal.Title>Upload your product</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    {upload && <Form>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Title</Form.Label>
                             <Form.Control onChange={(e) => { setTitle(e.target.value) }} type="text" placeholder="Enter a product title" />
@@ -123,7 +126,14 @@ const AddProduct = (props) => {
                         <Button onClick={(e) => { handleSend(e) }} variant="primary" type="submit">
                             Submit
                         </Button>
-                    </Form>
+                    </Form>}
+                    {!upload && <div className="upload-success">
+                        <div className="upload-success-text">Product uploaded !</div>
+                        <img src="/images/product/valid.png" />
+
+                    </div>
+
+                    }
                 </Modal.Body>
                 <Modal.Footer>
 

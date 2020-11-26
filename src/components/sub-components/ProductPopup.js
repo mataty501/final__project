@@ -4,7 +4,7 @@ import Caroussel from "./Caroussel";
 import axios from "axios";
 
 const ProductPopup = (props) => {
-  //const [show, setShow] = useState(false);
+  const [ordered, setOrdered] = useState(false);
 
   //const handleClose = () => setShow(false);
   //const handleShow = () => setShow(true);
@@ -25,7 +25,9 @@ const ProductPopup = (props) => {
       phoneNumber: number,
     };
     const response = await axios.post("http://localhost:5000/makeOrder", data);
-    //console.log(response)
+    if (response) {
+      setOrdered(!ordered)
+    }
   };
   return (
     <div className="product-popup" onClick={(e) => e.stopPropagation()}>
@@ -42,56 +44,64 @@ const ProductPopup = (props) => {
           <Modal.Body className="product-body">
             <div className="product-body-carousel-description">
               <Caroussel id={props.id} urlArray={props.urlArray} />
-              <div>aaa</div>
+
             </div>
 
-            <div className="product-body-purchase">
-              <p>{props.description}</p>
+            {!ordered &&
+              <div className="product-body-purchase">
 
-              <Form>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Complete name:</Form.Label>
-                  <Form.Control
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                    type="text"
-                    placeholder="Enter your complete name"
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Ligne d'adresse:</Form.Label>
-                  <Form.Control
-                    onChange={(e) => {
-                      setAddress(e.target.value);
-                    }}
-                    type="text"
-                    placeholder="Enter your address"
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Phone number:</Form.Label>
-                  <Form.Control
-                    onChange={(e) => {
-                      setNumber(e.target.value);
-                    }}
-                    type="text"
-                    placeholder="Enter your phone number"
-                  />
-                </Form.Group>
-                <Button
-                  onClick={(e) => order(e)}
-                  variant="primary"
-                  type="submit"
-                >
-                  Order !
+                <p>{props.description}</p>
+
+                <Form>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Complete name:</Form.Label>
+                    <Form.Control
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                      type="text"
+                      placeholder="Enter your complete name"
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Ligne d'adresse:</Form.Label>
+                    <Form.Control
+                      onChange={(e) => {
+                        setAddress(e.target.value);
+                      }}
+                      type="text"
+                      placeholder="Enter your address"
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Phone number:</Form.Label>
+                    <Form.Control
+                      onChange={(e) => {
+                        setNumber(e.target.value);
+                      }}
+                      type="text"
+                      placeholder="Enter your phone number"
+                    />
+                  </Form.Group>
+                  <Button
+                    onClick={(e) => order(e)}
+                    variant="primary"
+                    type="submit"
+                  >
+                    Order !
                 </Button>
-              </Form>
-            </div>
+                </Form></div>}
+            {ordered && <div className="order-success">
+              <div>Product ordered !</div>
+
+              <img src="/images/product/valid.png" />
+
+            </div>}
+
           </Modal.Body>
         </Modal>
       </div>
-    </div>
+    </div >
   );
 };
 

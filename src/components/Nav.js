@@ -40,7 +40,9 @@ const NavContainer = () => {
                     <Nav>
 
                         <Nav.Link href="#deets">
-                            <User show={show}
+                            <User
+
+                                show={show}
                                 close={handleClose}
                                 closePopup={closePopup}
                             />

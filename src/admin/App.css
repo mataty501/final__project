@@ -19,6 +19,58 @@
   cursor: pointer;
 }
 
+.logged {
+  fill: #4caf50 !important;
+}
+
+.fav-empty-msg {
+  width: 19rem;
+
+  margin: auto;
+}
+
+.upload-success {
+  width: 10rem;
+  height: 12rem;
+  margin: auto;
+}
+
+.upload-success-text {
+  text-align: center;
+  font-size: 18px;
+}
+
+.upload-success > img {
+  width: 10rem;
+}
+
+.order-success > img {
+  width: 10rem;
+  margin: auto;
+}
+
+.carousel-item {
+  height: 40rem !important;
+}
+
+.order-success-order {
+  margin: auto;
+  width: 12rem;
+}
+
+.signed-in-msg {
+  height: 10rem;
+  width: 15rem;
+  margin: auto;
+  display: flex;
+  text-align: center;
+  vertical-align: center;
+}
+.signed-in-msg > div {
+  width: 15rem;
+  height: 5rem;
+}
+
 .delete-trash-container {
   display: flex;
   justify-content: center;
