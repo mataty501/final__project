@@ -13,7 +13,7 @@ const Caroussel = (props) => {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={`http://localhost:5000/images/${elem}`}
+              src={`https://fastshop-server.herokuapp.com/images/${elem}`}
               alt="First slide"
             />
             <Carousel.Caption>

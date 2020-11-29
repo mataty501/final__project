@@ -73,15 +73,15 @@ const Products = (props) => {
     let dataFiltred =
       search !== ""
         ? Data.filter((elm) => {
-            console.log(search);
-            return elm.title.toLowerCase().includes(search);
-          })
+          console.log(search);
+          return elm.title.toLowerCase().includes(search);
+        })
         : Data;
     dataFiltred =
       gender !== ""
         ? dataFiltred.filter((elm) => {
-            return elm.gender == gender;
-          })
+          return elm.gender == gender;
+        })
         : dataFiltred;
     setFiltredData(dataFiltred);
 
